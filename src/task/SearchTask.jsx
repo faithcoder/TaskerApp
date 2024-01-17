@@ -1,4 +1,11 @@
-export default function SearchTask() {
+import { useState } from "react";
+
+export default function SearchTask({ onSearch }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  function handleClick(event) {
+    event.preventDefault();
+    onSearch(searchTerm);
+  }
   return (
     <>
       <form>
@@ -10,10 +17,13 @@ export default function SearchTask() {
               className="z-20 block w-full bg-gray-800 px-4 py-2 pr-10 focus:outline-none"
               placeholder="Search Task"
               required
+              value={searchTerm}
+              onChange={() => setSearchTerm(event.target.value)}
             />
             <button
               type="submit"
               className="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4"
+              onClick={handleClick}
             >
               <svg
                 className="h-4 w-4"
